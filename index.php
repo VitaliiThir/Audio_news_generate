@@ -1,10 +1,13 @@
 <?
-if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
-    require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
-    $create_request_id = $_REQUEST['audio_create_id'];
-    $create_request_txt = $_REQUEST['audio_create_txt'];
-    $create_request_url = $_REQUEST['audio_create_url'];
-} ?>
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+
+require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
+
+global $USER;
+$create_request_id = $_REQUEST['audio_create_id'];
+$create_request_txt = $_REQUEST['audio_create_txt'];
+$create_request_url = $_REQUEST['audio_create_url'];
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,8 +15,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= SITE_TEMPLATE_PATH ?>/assets/build/img/favicon/favicon-32x32.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <title>Наше время - Создание аудио-подкаста</title>
 </head>

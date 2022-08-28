@@ -2,10 +2,11 @@
 
 use Bitrix\Main\Application;
 
-if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
-    require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
-    header('Content-type: application/json');
-} ?>
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
+header('Content-type: application/json');
+?>
 
 <?php
 $request = Application::getInstance()->getContext()->getRequest();
@@ -65,7 +66,7 @@ if (is_ajax() && $request->getPost('action') == 'audio-news' && $request->getPos
         } else {
             $abs_path = $_SERVER['DOCUMENT_ROOT'];
             $base_folder = '/upload/audio';
-            $file_name = 'news_' . $news_id . '.ogg';
+            $file_name = "news_$news_id.ogg";
             $tmp_path = $base_folder . '/tmp/';
             $tmp_file = 'news_' . time() . '.ogg';
 
@@ -85,15 +86,19 @@ if (is_ajax() && $request->getPost('action') == 'audio-news' && $request->getPos
                 $month = date('m_Y');
                 $folder = $base_folder . '/' . $month;
                 $file_value = $folder . '/' . $file_name;
+
                 if (!is_dir($abs_path . $folder)) {
                     mkdir($abs_path . $folder);
                 }
+
                 file_put_contents($abs_path . $file_value, $response);
                 $set_text = CIBlockElement::SetPropertyValues($news_id, $iblock_id, $file_value, "AUDIO_FILE");
+
                 echo json_encode([
                     'STATUS' => 'success',
-                    'TEXT' => 'Файл успешно создан!<br>Перейти к <a href="' . $news_link . '">новости</a>'
+                    'TEXT' => "Файл успешно создан!<br>Перейти к <a href="$news_link">новости</a>"
                 ]);
+
             }
         }
         curl_close($ch);

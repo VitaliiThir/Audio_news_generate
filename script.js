@@ -40,10 +40,10 @@ $(function () {
                         error  : (err) => {
                             response_block.html(alertNTF(
                                 'danger',
-                                'Ошибка ответа сервера!<br>' +
-                                'Возможно, превышено кол-во символов (более 5 тыс.)<br>' +
-                                '<a href="https://involta.ru/tools/length-chars/" target="_blank">Сайт для подсчёта символов в тексте.</a>' +
-                                '<br>Повторите попытку!'));
+                                `Ошибка ответа сервера!<br>
+                                 Возможно, превышено кол-во символов (более 5 тыс.)<br>
+                                 <a href="https://involta.ru/tools/length-chars/" target="_blank">Сайт для подсчёта символов в тексте.</a>
+                                 <br>Повторите попытку!`));
                             goToResponseBlock(response_block);
                             loader(false);
                         }
@@ -85,12 +85,12 @@ $(function () {
 
 function loader(state) {
     let body         = $('body'),
-        loader       = '<div class="audio-loader">\n' +
-                    '        <div class="audio-loader__item">\n' +
-                    '            <img class="audio-loader__item-loader" src="/images/loader.gif" alt="Наше время">\n' +
-                    '            <p class="audio-loader__item-text h4">Генерация...</p>\n' +
-                    '        </div>\n' +
-                    '   </div>',
+        loader       = `<div class="audio-loader">
+                             <div class="audio-loader__item">
+                                 <img class="audio-loader__item-loader" src="/images/loader.gif" alt="Наше время">
+                                 <p class="audio-loader__item-text h4">Генерация...</p>
+                             </div>
+                        </div>`,
         loader_class = '.audio-loader',
         input        = '[value="success"]';
 
@@ -112,5 +112,5 @@ function goToResponseBlock(block, offset = 70) {
 }
 
 function alertNTF(type, text) {
-    return '<div class="alert alert-' + type + '">' + text + '</div>';
+    return `<div class="alert alert-${type}">${text}</div>`;
 }
